@@ -37,3 +37,21 @@ query Query {
  },
 }
 
+
+///// query_graphQL_test.txt - P3
+mutation myMu1{
+  createAuthor(  id: 4, name: "thach lam", age : 90) {
+    id, books {
+      id
+    }
+  }
+}
+
+mutation myMu1{
+  createBook(id: 7, authorId: 2, genre:
+  "123", name: "Sach doi giao hu") {
+    id, author {
+      id, name
+    }
+  }
+}

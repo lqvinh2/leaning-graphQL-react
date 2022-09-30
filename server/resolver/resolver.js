@@ -3,7 +3,7 @@ const {authors, books } = require('../data/static')
 
 const resolvers = {
 
-    // QUERY
+    // QUERY START
     Query: {
         books: (parent, args) => books,
         book: (parent, args) => books.find(x => x.id == args.id ),
@@ -20,6 +20,17 @@ const resolvers = {
     // handle [field books] in [type Author] schema.js
     Author: {
 		books: async (parent, args) => books.filter(x => x.authorId == parent.id ),
+    },
+    // QUERY END
+
+
+    // MUTATION START
+
+
+    // MUTATION END
+    Mutation: {
+        createAuthor: (parent, args) => args,
+        createBook : (parent, args) => args
     },
 
 }
