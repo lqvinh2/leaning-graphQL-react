@@ -6,10 +6,18 @@ const typeDefs = gql`
 		name: String
 		genre: String
 	}
+    type Author {
+		id: ID!
+		name: String
+		age: Int
+	}
 
     # ROOT TYPE
 	type Query {
-		books: [Book]
+        books: [Book]
+		book(id: ID!): Book
+		authors: [Author]
+		author(id: ID!): Author
 	}
 
 `

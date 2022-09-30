@@ -1,0 +1,14 @@
+query Query {
+  books {
+    id, name, genre
+  },
+  book(id: 2) {
+    id, name, genre
+  },
+  authors {
+      id
+  },
+ author(id: 2) {
+   id, name, age
+ },
+}
