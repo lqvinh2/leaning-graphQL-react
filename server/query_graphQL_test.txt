@@ -55,3 +55,32 @@ mutation myMu1{
     }
   }
 }
+
+
+
+///// query_graphQL_test.txt - P4
+query GetAllBooks{
+    books {
+    id, name, genre
+  },
+
+},
+query GetAllAuthors{
+    authors {
+      id
+    }
+
+},
+query GetBookById{
+    book(id: "633861b7a51480adc3738585") {
+      name
+    }
+
+}
+,
+query GetAuthorById{
+    author(id: "63386801c87c4b90f030cad8") {
+      name
+    }
+
+}

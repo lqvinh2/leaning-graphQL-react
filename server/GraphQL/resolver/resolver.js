@@ -1,4 +1,4 @@
-const {authors, books } = require('../data/static')
+const {authors, books } = require('../../data/static')
 
 
 const resolvers = {
