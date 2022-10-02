@@ -10,77 +10,37 @@ import { getBooks } from '../graphql-client/queries'
 
 const BookList = () => {
 
-  const { loading, error, data } = useQuery(getBooks);
+  const { loading: loadingGetBooks , error, data } = useQuery(getBooks);
+  const [bookSelected, setBookSelected] = useState(null);
 
-  if (loading) {
-    return <p>loading....</p>
-  }
   if (error) {
-    return <p>{ error}</p>
+    return <p>{error}</p>
   }
-
 
   return (
-    <Row>
-      <Col xs={8}>
+    <>
+      {loadingGetBooks && data == null ?
+        <>Loading...</> :
         <Row>
-          <Col xs={4} className='p-0 p-1'>
-            <Card border='info' text='info' className='text-center shadow'>
-              <Card.Body>
-                <Card.Title>Ky Nghe Lay Tay</Card.Title>
-              </Card.Body>
-            </Card>
+          <Col xs={8}>
+            <Row>
+              {data.books.map(book => {
+                return <Col xs={4} className='p-0 p-1' key={book.id}>
+                  <Card border='info' text='info' className='text-center shadow' onClick={setBookSelected.bind(this, book.id)}>
+                  <Card.Body>
+                      <Card.Title>{ book.name}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+              })}
+            </Row>
           </Col>
-
-          <Col xs={4} className='p-0 p-1'>
-            <Card border='info' text='info' className='text-center shadow'>
-              <Card.Body>
-                <Card.Title>Ky Nghe Lay Tay</Card.Title>
-              </Card.Body>
-            </Card>
+          <Col xs={4}>
+            <BookDetails bookId={bookSelected} />
           </Col>
-
-          <Col xs={4} className='p-0 p-1'>
-            <Card border='info' text='info' className='text-center shadow'>
-              <Card.Body>
-                <Card.Title>Ky Nghe Lay Tay</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col xs={4} className='p-0 p-1'>
-            <Card border='info' text='info' className='text-center shadow'>
-              <Card.Body>
-                <Card.Title>Ky Nghe Lay Tay</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-
-
-          <Col xs={4} className='p-0 p-1'>
-            <Card border='info' text='info' className='text-center shadow'>
-              <Card.Body>
-                <Card.Title>Ky Nghe Lay Tay</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col xs={4} className='p-0 p-1'>
-            <Card border='info' text='info' className='text-center shadow'>
-              <Card.Body>
-                <Card.Title>Ky Nghe Lay Tay</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-
-
-
         </Row>
-      </Col>
-      <Col xs={4}>
-        <BookDetails />
-      </Col>
-    </Row>
+      }
+    </>
   )
 }
 
