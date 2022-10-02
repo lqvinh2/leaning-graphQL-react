@@ -1,36 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
+import  BookList  from './components/BookList';
+import Forms from './components/Forms';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 
-
+const client = new ApolloClient({
+	uri: 'http://localhost:4000/graphql',
+	cache: new InMemoryCache()
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Button variant="primary">Primary</Button>{' '}
-      <Button variant="secondary">Secondary</Button>{' '}
-      <Button variant="success">Success</Button>{' '}
-      <Button variant="warning">Warning</Button>{' '}
-      <Button variant="danger">Danger</Button>{' '}
-      <Button variant="info">Info</Button>{' '}
-      <Button variant="light">Light</Button>{' '}
-      <Button variant="dark">Dark</Button> <Button variant="link">Link</Button>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <Container className='py-3 mt-3' style={{ backgroundColor: 'lightcyan' }}>
+        <h1 className='text-center text-info mb-3'>My Books</h1>
+        <hr />
+        <Forms />
+        <hr />
+        <BookList />
+      </Container>
+    </ApolloProvider>
   );
 }
 
